@@ -656,9 +656,9 @@ lang="es">
 
   </div>
 
-  <!-- ── World Elite — fila propia ── -->
-  <div class="reveal" style="margin-bottom:16px;">
-    <div class="hstat" style="border-color:var(--gold-border);display:inline-flex;flex-direction:column;align-items:center;padding:18px 36px;">
+  <!-- ── World Elite + Bonus Cashback — fila propia ── -->
+  <div class="reveal" style="margin-bottom:16px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <div class="hstat" style="border-color:var(--gold-border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 24px;width:220px;">
       <svg width="44" height="28" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:6px;">
         <defs><linearGradient id="cg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#16213e"/></linearGradient></defs>
         <rect width="80" height="50" rx="6" fill="url(#cg2)"/>
@@ -670,6 +670,11 @@ lang="es">
       </svg>
       <div class="hstat-num" style="color:var(--gold);">7</div>
       <div class="hstat-label">Tarjetas World Elite</div>
+    </div>
+    <div class="hstat" style="border-color:var(--gold-border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 24px;width:220px;">
+      <div style="font-size:26px;margin-bottom:6px;">🎁</div>
+      <div class="hstat-num" style="color:var(--gold);">1%</div>
+      <div class="hstat-label" style="line-height:1.5;">Bonus Cashback del 1% por los primeros 6 meses</div>
     </div>
   </div>
 
@@ -888,9 +893,7 @@ lang="es">
   <div class="section-inner">
 
     <div class="reveal">
-      <div class="section-tag">② Calculadora de Inversión</div>
-      <h2 class="section-h">Calcula tu costo<br><em style="font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">exacto anual.</em></h2>
-      <p class="section-sub">Ajusta los parámetros y visualiza en tiempo real cuánto invierte tu empresa en la plataforma Jeeves — en USD y COP.</p>
+      <div class="section-tag">② Costo de tu plan</div>
     </div>
 
     <div class="calc-wrapper reveal">
@@ -898,7 +901,7 @@ lang="es">
       <!-- Header with TDC -->
       <div class="calc-header">
         <div>
-          <div class="calc-title">💰 Calculadora de Inversión · Colombia</div>
+          <div class="calc-title">💰 Costo de tu plan</div>
           <div class="calc-subtitle">Celdas en <span>dorado</span> = valores editables · Todo se recalcula al instante</div>
         </div>
         <div class="tdc-wrap">
@@ -948,7 +951,7 @@ lang="es">
               <label class="input-label">Gasto mensual en tarjetas (COP)</label>
               <div class="input-row">
                 <span class="input-prefix">$</span>
-                <input id="gasto_tarjetas" class="calc-input" type="number" value="550000000" step="5000000" oninput="recalc()">
+                <input id="gasto_tarjetas" class="calc-input" type="number" value="1000000000" step="5000000" oninput="recalc()">
                 <span class="input-suffix">COP/mes</span>
               </div>
               <div class="input-hint" id="hint_gasto_anual" style="color:var(--text-muted);">Semestral: —</div>
@@ -956,41 +959,6 @@ lang="es">
           </div>
 
 
-          <!-- Cajero automático (3) -->
-          <div style="border-top:1px solid var(--black-4);padding-top:22px;margin-top:4px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-              <label class="toggle-switch">
-                <input type="checkbox" id="cajero_check" onchange="toggleCajero()">
-                <span class="toggle-slider"></span>
-              </label>
-              <span class="calc-section-label" style="margin-bottom:0;">🏧 Retiros en Cajero Automático</span>
-            </div>
-            <div style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">Activa si el cliente usa cajeros — calcula el ahorro por comisiones eliminadas</div>
-
-            <div id="cajero-fields" style="display:none;">
-              <div class="input-group">
-                <label class="input-label">Gasto mensual en retiros cajero (COP)</label>
-                <div class="input-row">
-                  <span class="input-prefix">$</span>
-                  <input id="gasto_cajeros" class="calc-input blue" type="number" value="200000000" step="5000000" oninput="recalc()">
-                  <span class="input-suffix">COP/mes</span>
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label class="input-label">Descuento de comisión por retiro en cajero (%)
-              <span class="info-tooltip">
-                <span class="info-icon">i</span>
-                <span class="tooltip-text">Comisión normal Jeeves 3% adicional a lo que cobran los cajeros.</span>
-              </span></label>
-                <div class="input-row">
-                  <input id="comision_caj" class="calc-input blue" type="number" value="0" step="0.1" min="0" max="10" oninput="recalc()">
-                  <span class="input-suffix">%</span>
-                </div>
-                <div class="input-hint">Jeeves elimina esta comisión → ahorro directo anual en USD</div>
-              </div>
-            </div>
-          </div>
 
 
         </div>
@@ -1037,20 +1005,6 @@ lang="es">
               <div class="result-amounts">
                 <div class="result-mxn green" id="res_cb_usd">USD 0</div>
                 <div class="result-usd" id="res_cb_cop">≈ COP 0</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cajero savings — oculto si comisión = 0 -->
-          <div class="result-row" id="res_caj_row" style="display:none;">
-            <div class="result-row-top">
-              <div>
-                <div class="result-name" id="res_caj_label">Ahorro comisiones cajero</div>
-                <div class="result-sub">Comisión eliminada × gasto anual en USD</div>
-              </div>
-              <div class="result-amounts">
-                <div class="result-mxn green" id="res_caj_usd">USD 0</div>
-                <div class="result-usd" id="res_caj_cop">≈ COP 0</div>
               </div>
             </div>
           </div>
@@ -1326,10 +1280,6 @@ function recalc() {
   var platMesUSD = platAnoUSDInput / 12; // USD/mes (derivado, solo para referencia)
   var gastoMesCOP = parseFloat(document.getElementById('gasto_tarjetas').value) || 0; // COP
   var gastoMesUSD = gastoMesCOP / tdc; // convertir a USD
-  var cajeroActivo = document.getElementById('cajero_check').checked;
-  var cajMesCOP  = cajeroActivo ? (parseFloat(document.getElementById('gasto_cajeros').value) || 0) : 0; // COP
-  var cajMesUSD  = cajMesCOP / tdc; // convertir a USD
-  var comCaj   = cajeroActivo ? (parseFloat(document.getElementById('comision_caj').value) || 0) : 0;
 
   // Tier 4 siempre activo
   highlightTier(3);
@@ -1356,13 +1306,8 @@ function recalc() {
   var cbUSD = gastoMesUSD * 0.01 * 6;
   var cbCOP = cbUSD * tdc;
 
-  // Cajero savings (gasto in USD already)
-  var cajAnoUSD = cajMesUSD * (comCaj/100) * 12;
-  var cajAnoCOP = cajAnoUSD * tdc;
-
-
   // Neto
-  var totalSavingsUSD = cbUSD + cajAnoUSD;
+  var totalSavingsUSD = cbUSD;
   var netoAnoUSD = totalAnoUSD - totalSavingsUSD;
   var netoAnoCOP = netoAnoUSD * tdc;
 
@@ -1384,17 +1329,6 @@ function recalc() {
   // Cashback
   setText('res_cb_usd', fusd(cbUSD));
   setText('res_cb_cop', '≈ COP ' + fcop(cbCOP));
-
-  // Cajero
-  if (cajeroActivo && cajAnoUSD > 0) {
-    show('res_caj_row');
-    document.getElementById('res_caj_label').textContent = 'Ahorro comisiones cajero (' + comCaj + '%)';
-    setText('res_caj_usd', fusd(cajAnoUSD));
-    setText('res_caj_cop', '≈ COP ' + fcop(cajAnoCOP));
-  } else {
-    hide('res_caj_row');
-  }
-
 
   // Neto
   var netoEl = document.getElementById('res_neto_usd2');
@@ -1433,12 +1367,6 @@ function recalc() {
   setText('bt_neto_ano', fusd(netoAnoUSD));
   setText('bt_neto_usd', fusd(netoAnoUSD));
 } // end recalc
-
-function toggleCajero() {
-  var checked = document.getElementById('cajero_check').checked;
-  document.getElementById('cajero-fields').style.display = checked ? '' : 'none';
-  setTimeout(recalc, 0);
-}
 
 
 function setText(id, val) {
